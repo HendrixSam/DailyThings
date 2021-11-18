@@ -15,6 +15,7 @@
                     <FormattedString.Spans>
                         <Span Text="Learn more at "/>
                         <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
+                        <Span Text="修改推送测试"/>
                     </FormattedString.Spans>
                 </FormattedString>
             </Label.FormattedText>
