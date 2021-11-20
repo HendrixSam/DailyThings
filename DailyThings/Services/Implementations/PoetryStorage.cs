@@ -13,20 +13,22 @@ namespace DailyThings.Services.Implementations {
     /// 诗词存储实现
     /// </summary>
     public class PoetryStorage : IPoetryStorage {
+        /******** 公有变量 ********/
+
+        /// <summary>
+        /// 诗词数据库文件路径
+        /// </summary>
+        public static readonly string PoetryDbPath =
+            Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder
+                    .LocalApplicationData), PoetryDbName);
+
         /******** 私有变量 ********/
 
         /// <summary>
         /// 诗词数据库文件名称
         /// </summary>
         private const string PoetryDbName = "poetry.db";
-
-        /// <summary>
-        /// 诗词数据库文件路径
-        /// </summary>
-        private static readonly string PoetryDbPath =
-            Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder
-                    .LocalApplicationData), PoetryDbName);
 
         /// <summary>
         /// 数据库连接
