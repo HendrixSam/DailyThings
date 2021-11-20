@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DailyThings.Models {
+﻿namespace DailyThings.Models {
     /// <summary>
     /// 诗词类
     /// </summary>
