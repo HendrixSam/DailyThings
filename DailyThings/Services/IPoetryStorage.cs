@@ -9,15 +9,16 @@ namespace DailyThings.Services {
     /// 诗词存储接口
     /// </summary>
     public interface IPoetryStorage {
-        /// <summary>
-        /// 是否已经初始化
-        /// </summary>
-        bool Initialized();
 
         /// <summary>
         /// 初始化诗词存储
         /// </summary>
         Task InitializeAsync();
+
+        /// <summary>
+        /// 是否已经初始化
+        /// </summary>
+        bool Initialized();
 
         /// <summary>
         /// 获取一个诗词
@@ -40,7 +41,7 @@ namespace DailyThings.Services {
     /// </summary>
     public static class PoetryStorageConstants {
         /// <summary>
-        /// 版本键
+        /// 版本键"PoetryStorageConstants.Version"
         /// </summary>
         public const string VersionKey =
             nameof(PoetryStorageConstants) + "." + nameof(Version);
@@ -49,5 +50,10 @@ namespace DailyThings.Services {
         /// 版本
         /// </summary>
         public const int Version = 1;
+
+        /// <summary>
+        /// 默认版本
+        /// </summary>
+        public const int DefaultVersion = -1;
     }
 }

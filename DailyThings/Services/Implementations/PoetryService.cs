@@ -7,8 +7,6 @@ namespace DailyThings.Services.Implementations {
     /// 诗词服务
     /// </summary>
     public class PoetryService : IPoetryService {
-        
-
         /******** 继承方法 ********/
         /// <summary>
         /// 获得诗词
