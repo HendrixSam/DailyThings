@@ -11,11 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Static\poetry.db" />
+    <None Remove="Static\Poetry.db" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Static\poetry.db" />
+    <EmbeddedResource Include="Static\Poetry.db" />
   </ItemGroup>
 
   <ItemGroup>
