@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DailyThings.Services {
+﻿namespace DailyThings.Services {
     public interface IPreferenceStorage {
         /// <param name="key">Preference key.</param>
         /// <param name="value">Preference value.</param>

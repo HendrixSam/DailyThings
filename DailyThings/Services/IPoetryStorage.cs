@@ -1,8 +1,8 @@
-﻿using System;
+﻿using DailyThings.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using DailyThings.Models;
 
 namespace DailyThings.Services {
     /// <summary>

@@ -1,12 +1,11 @@
-﻿using System;
+﻿using DailyThings.Models;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using DailyThings.Models;
-using SQLite;
-using Xamarin.Essentials;
 
 namespace DailyThings.Services.Implementations {
     /// <summary>
@@ -37,7 +36,7 @@ namespace DailyThings.Services.Implementations {
 
         private SQLiteAsyncConnection Connection =>
             _connection ??
-            (_connection = new SQLiteAsyncConnection(PoetryDbName));
+            (_connection = new SQLiteAsyncConnection(PoetryDbPath));
 
         /// <summary>
         /// 偏好存储
@@ -98,5 +97,10 @@ namespace DailyThings.Services.Implementations {
         public PoetryStorage(IPreferenceStorage preferenceStorage) {
             _preference = preferenceStorage;
         }
+
+        /// <summary>
+        /// 关闭诗词数据库
+        /// </summary>
+        public async Task CloseAsync() => await Connection.CloseAsync();
     }
 }

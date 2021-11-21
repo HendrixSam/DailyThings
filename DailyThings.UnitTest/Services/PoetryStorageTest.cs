@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using DailyThings.Services;
 using DailyThings.Services.Implementations;
 using DailyThings.UnitTest.Helpers;
 using Moq;
 using NUnit.Framework;
-using Xamarin.Essentials;
+using System.IO;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using DailyThings.Models;
 
 namespace DailyThings.UnitTest.Services {
     /// <summary>
@@ -18,7 +17,7 @@ namespace DailyThings.UnitTest.Services {
         [SetUp, TearDown] //SetUp单元测试运行前运行，TearDown单元测试运行后运行
         public static void RemoveDatabaseFile() =>
             PoetryStorageHelper.RemoveDataBaseFile();
-        
+
         /// <summary>
         /// 测试初始化诗词存储
         /// </summary>
@@ -74,8 +73,26 @@ namespace DailyThings.UnitTest.Services {
         /// </summary>
         [Test]
         public async Task TestGetPoetryAsync() {
-            var poetryStorage = await PoetryStorageHelper.GetInitializedPoetryStorageAsync();
+            var poetryStorage =
+                await PoetryStorageHelper.GetInitializedPoetryStorageAsync();
+            var poetry = await poetryStorage.GetPoetryAsync(10001);
+            Assert.AreEqual("临江仙 · 夜归临皋", poetry.Name);
+            await poetryStorage.CloseAsync();
+        }
 
+        /// <summary>
+        /// 获取满足给定条件的诗词集合
+        /// </summary>
+        [Test]
+        public async Task TestGetPoetryListAsync() {
+            var poetryStorage =
+                await PoetryStorageHelper.GetInitializedPoetryStorageAsync();
+            var poetryList = await poetryStorage.GetPoetryListAsync(
+                Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
+                    Expression.Parameter(typeof(Poetry), "p")), 0,
+                int.MaxValue);//这个条件表示任何都满足
+            Assert.AreEqual(PoetryStorageHelper.NumberPoetry, poetryList.Count);
+            await poetryStorage.CloseAsync();
         }
     }
 }

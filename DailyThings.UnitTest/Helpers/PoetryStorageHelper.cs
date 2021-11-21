@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DailyThings.Services;
+﻿using DailyThings.Services;
 using DailyThings.Services.Implementations;
 using Moq;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace DailyThings.UnitTest.Helpers {
     /// <summary>
     /// 诗词存储帮助类
     /// </summary>
     public static class PoetryStorageHelper {
+        /******** 公有变量 ********/
+
+        /// <summary>
+        /// 诗词数据库中诗词的数量
+        /// </summary>
+        public const int NumberPoetry = 30; 
+
         /// <summary>
         /// 获得已初始化的诗词存储
         /// </summary>
