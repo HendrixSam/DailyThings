@@ -35,10 +35,14 @@ namespace DailyThings.Services.Implementations {
         /// </summary>
         private SQLiteAsyncConnection _connection;
 
-        public SQLiteAsyncConnection Connection =>
+        private SQLiteAsyncConnection Connection =>
             _connection ??
             (_connection = new SQLiteAsyncConnection(PoetryDbName));
 
+        /// <summary>
+        /// 偏好存储
+        /// </summary>
+        private IPreferenceService _preference;
         /******** 继承方法 ********/
 
         /// <summary>
@@ -54,7 +58,7 @@ namespace DailyThings.Services.Implementations {
                 }
             }
 
-            Preferences.Set(PoetryStorageConstants.VersionKey,
+            _preference.Set(PoetryStorageConstants.VersionKey,
                 PoetryStorageConstants.Version);
         }
 
@@ -62,7 +66,7 @@ namespace DailyThings.Services.Implementations {
         /// 是否已经初始化
         /// </summary>
         public bool Initialized() =>
-            Preferences.Get(PoetryStorageConstants.VersionKey,
+            _preference.Get(PoetryStorageConstants.VersionKey,
                 PoetryStorageConstants.DefaultVersion) ==
             PoetryStorageConstants.Version;
 
@@ -85,5 +89,14 @@ namespace DailyThings.Services.Implementations {
             Expression<Func<Poetry, bool>> @where, int skip, int take) =>
             await Connection.Table<Poetry>().Where(@where).Skip(skip).Take(take)
                 .ToListAsync();
+
+        /******** 公有方法 ********/
+
+        /// <summary>
+        /// 构造方法
+        /// </summary>
+        public PoetryStorage(IPreferenceService preference) {
+            _preference = preference;
+        }
     }
 }
