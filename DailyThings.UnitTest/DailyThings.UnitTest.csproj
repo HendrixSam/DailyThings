@@ -19,8 +19,4 @@
     <ProjectReference Include="..\DailyThings\DailyThings.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
 </Project>

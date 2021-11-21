@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DailyThings.Services;
 using DailyThings.Services.Implementations;
+using DailyThings.UnitTest.Helpers;
 using Moq;
 using NUnit.Framework;
 using Xamarin.Essentials;
@@ -15,10 +16,9 @@ namespace DailyThings.UnitTest.Services {
     /// </summary>
     public class PoetryStorageTest {
         [SetUp, TearDown] //SetUp单元测试运行前运行，TearDown单元测试运行后运行
-        public static void RemoveDatabaseFile() {
-            File.Delete(PoetryStorage.PoetryDbPath); //自动删除单元测试的文件
-        }
-
+        public static void RemoveDatabaseFile() =>
+            PoetryStorageHelper.RemoveDataBaseFile();
+        
         /// <summary>
         /// 测试初始化诗词存储
         /// </summary>
@@ -74,6 +74,7 @@ namespace DailyThings.UnitTest.Services {
         /// </summary>
         [Test]
         public async Task TestGetPoetryAsync() {
+            var poetryStorage = await PoetryStorageHelper.GetInitializedPoetryStorageAsync();
 
         }
     }
