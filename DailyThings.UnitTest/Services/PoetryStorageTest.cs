@@ -32,6 +32,9 @@ namespace DailyThings.UnitTest.Services {
             var poetryStorage = new PoetryStorage(mockPreferenceService);
             await poetryStorage.InitializeAsync(); //进行初始化
             Assert.IsTrue(File.Exists(PoetryStorage.PoetryDbPath));
+            preferenceStorageMock.Verify(p =>
+                p.Set(PoetryStorageConstants.VersionKey,
+                    PoetryStorageConstants.Version), Times.Once);// 测试版本号的set是否调用过一次
         }
     }
 }
