@@ -68,5 +68,13 @@ namespace DailyThings.UnitTest.Services {
             var poetryStorage = new PoetryStorage(mockPreferenceService);
             Assert.IsFalse(poetryStorage.Initialized());
         }
+
+        /// <summary>
+        /// 测试得到一首诗词
+        /// </summary>
+        [Test]
+        public async Task TestGetPoetryAsync() {
+
+        }
     }
 }

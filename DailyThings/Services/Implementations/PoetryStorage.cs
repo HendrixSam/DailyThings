@@ -72,7 +72,7 @@ namespace DailyThings.Services.Implementations {
 
 
         /// <summary>
-        /// 获取一个诗词
+        /// 获取一首诗词
         /// </summary>
         /// <param name="id">诗词id</param>
         public async Task<Poetry> GetPoetryAsync(int id) =>
