@@ -46,12 +46,11 @@ namespace DailyThings.Services.Implementations {
         /// </summary>
         public async Task InitializeAsync() {
             using (var dbFileStream =
-                new FileStream(PoetryDbPath, FileMode.Create)) {
-                using (var dbAssertStream = Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream(PoetryDbName)) {
-                    if (dbAssertStream != null) {
-                        await dbAssertStream.CopyToAsync(dbFileStream);
-                    }
+                new FileStream(PoetryDbPath, FileMode.Create))
+            using (var dbAssertStream = Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream(PoetryDbName)) {
+                if (dbAssertStream != null) {
+                    await dbAssertStream.CopyToAsync(dbFileStream);
                 }
             }
 
