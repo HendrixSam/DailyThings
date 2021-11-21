@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace DailyThings.Services {
-    public interface IPreferenceService {
+    public interface IPreferenceStorage {
         /// <param name="key">Preference key.</param>
         /// <param name="value">Preference value.</param>
         /// <summary>Sets a value for a given key.</summary>

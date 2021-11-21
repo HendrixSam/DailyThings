@@ -42,7 +42,7 @@ namespace DailyThings.Services.Implementations {
         /// <summary>
         /// 偏好存储
         /// </summary>
-        private IPreferenceService _preference;
+        private IPreferenceStorage _preference;
         /******** 继承方法 ********/
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace DailyThings.Services.Implementations {
         /// <summary>
         /// 构造方法
         /// </summary>
-        public PoetryStorage(IPreferenceService preference) {
-            _preference = preference;
+        public PoetryStorage(IPreferenceStorage preferenceStorage) {
+            _preference = preferenceStorage;
         }
     }
 }

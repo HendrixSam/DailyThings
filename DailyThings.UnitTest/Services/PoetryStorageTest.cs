@@ -27,7 +27,7 @@ namespace DailyThings.UnitTest.Services {
             Assert.IsFalse(
                 File.Exists(PoetryStorage
                     .PoetryDbPath)); //没有初始化前PoetryDbPath一定不存在
-            var preferenceStorageMock = new Mock<IPreferenceService>(); //mock工具
+            var preferenceStorageMock = new Mock<IPreferenceStorage>(); //mock工具
             var mockPreferenceService = preferenceStorageMock.Object; //得到的mock
             var poetryStorage = new PoetryStorage(mockPreferenceService);
             await poetryStorage.InitializeAsync(); //进行初始化
