@@ -22,6 +22,11 @@ namespace DailyThings.Services.Implementations {
         /// </summary>
         private IPreferenceStorage _preferenceStorage;
 
+        /// <summary>
+        /// 警告服务
+        /// </summary>
+        private IAlertService _alertService;
+
         /******** 继承方法 ********/
         /// <summary>
         /// 获得诗词
@@ -36,8 +41,10 @@ namespace DailyThings.Services.Implementations {
         /// 诗词服务构造方法
         /// </summary>
         /// <param name="preferenceStorage">偏好存储</param>
-        public PoetryService(IPreferenceStorage preferenceStorage) {
+        /// <param name="alertService">警告服务</param>
+        public PoetryService(IPreferenceStorage preferenceStorage, IAlertService alertService) {
             _preferenceStorage = preferenceStorage;
+            _alertService = alertService;
         }
 
         /******** 私有方法 ********/
