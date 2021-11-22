@@ -10,7 +10,7 @@ namespace DailyThings.Utils {
         /// <summary>
         /// HttpClient错误标题。
         /// </summary>
-        public const string HTTP_CLIENT_ERROR_TITLE = "连接错误";
+        public const string HttpClientErrorTitle = "连接错误";
 
         /// <summary>
         /// 获得HttpClient错误信息。
@@ -24,6 +24,6 @@ namespace DailyThings.Utils {
         /// <summary>
         /// HttpClient错误按钮。
         /// </summary>
-        public const string HTTP_CLIENT_ERROR_BUTTON = "确定";
+        public const string HttpClientErrorButton = "确定";
     }
 }

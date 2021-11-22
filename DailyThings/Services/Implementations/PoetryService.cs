@@ -67,9 +67,9 @@ namespace DailyThings.Services.Implementations {
                     response.EnsureSuccessStatusCode();
                 } catch (Exception e) {
                     _alertService.DisplayAlert(
-                        ErrorMessages.HTTP_CLIENT_ERROR_TITLE,
+                        ErrorMessages.HttpClientErrorTitle,
                         ErrorMessages.HttpClientErrorMessage(PoetryServer,
-                            e.Message), ErrorMessages.HTTP_CLIENT_ERROR_BUTTON);
+                            e.Message), ErrorMessages.HttpClientErrorButton);
                     return await GetRandomPoetryAsync();
                 }
 
@@ -135,9 +135,9 @@ namespace DailyThings.Services.Implementations {
                     response.EnsureSuccessStatusCode();
                 } catch (Exception e) {
                     _alertService.DisplayAlert(
-                        ErrorMessages.HTTP_CLIENT_ERROR_TITLE,
+                        ErrorMessages.HttpClientErrorTitle,
                         ErrorMessages.HttpClientErrorMessage(PoetryServer,
-                            e.Message), ErrorMessages.HTTP_CLIENT_ERROR_BUTTON);
+                            e.Message), ErrorMessages.HttpClientErrorButton);
                     return _token;
                 }
 
