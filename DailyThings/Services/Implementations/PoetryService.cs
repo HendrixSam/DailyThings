@@ -68,8 +68,8 @@ namespace DailyThings.Services.Implementations {
                 } catch (Exception e) {
                     _alertService.DisplayAlert(
                         ErrorMessages.HTTP_CLIENT_ERROR_TITLE,
-                        ErrorMessages.HttpClientErrorMessage(PoetryServer, e.Message),
-                        ErrorMessages.HTTP_CLIENT_ERROR_BUTTON);
+                        ErrorMessages.HttpClientErrorMessage(PoetryServer,
+                            e.Message), ErrorMessages.HTTP_CLIENT_ERROR_BUTTON);
                     return await GetRandomPoetryAsync();
                 }
 
