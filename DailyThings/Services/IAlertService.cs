@@ -13,6 +13,6 @@ namespace DailyThings.Services {
         /// <param name="title">标题</param>
         /// <param name="content">内容</param>
         /// <param name="button">按钮文字</param>
-        void DisPlayAlert(string title, string content, string button);
+        void DisplayAlert(string title, string content, string button);
     }
 }

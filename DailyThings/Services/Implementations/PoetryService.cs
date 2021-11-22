@@ -42,7 +42,34 @@ namespace DailyThings.Services.Implementations {
         /// 获得诗词
         /// </summary>
         public async Task<Poetry> GetPoetryAsync() {
-            throw new NotImplementedException();
+            var token = await GetPoetryTokenAsync();
+            //if (string.IsNullOrEmpty(token)) {
+            //    return await GetRandomPoetryAsync();
+            //}
+
+            //JinrishiciSentence jinrishiciSentence;
+            using (var httpClient = new HttpClient()) {
+                var headers = httpClient.DefaultRequestHeaders;
+                headers.Add("X-User-Token", token);
+
+                HttpResponseMessage response;
+                try {
+                    response =
+                        await httpClient.GetAsync(
+                            "https://v2.jinrishici.com/sentence");
+                    response.EnsureSuccessStatusCode();
+                } catch (Exception e) {
+                    _alertService.DisplayAlert(
+                        ErrorMessages.HTTP_CLIENT_ERROR_TITLE,
+                        ErrorMessages.HttpClientErrorMessage(Server, e.Message),
+                        ErrorMessages.HTTP_CLIENT_ERROR_BUTTON);
+                    return await GetRandomPoetryAsync();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+                jinrishiciSentence =
+                    JsonConvert.DeserializeObject<JinrishiciSentence>(json);
+            }
         }
 
         /******** 公有方法 ********/
@@ -62,7 +89,7 @@ namespace DailyThings.Services.Implementations {
         /// <summary>
         /// 获得诗词Token
         /// </summary>
-        public async Task<string> GetPoetryTokenAsync() {
+        private async Task<string> GetPoetryTokenAsync() {
             //一级缓存,从内存中读取
             if (!string.IsNullOrEmpty(_token)) {
                 return _token;
@@ -84,7 +111,7 @@ namespace DailyThings.Services.Implementations {
                             "https://v2.jinrishici.com/token");
                     response.EnsureSuccessStatusCode();
                 } catch (Exception e) {
-                    _alertService.DisPlayAlert(
+                    _alertService.DisplayAlert(
                         ErrorMessages.HTTP_CLIENT_ERROR_TITLE,
                         ErrorMessages.HttpClientErrorMessage(PoetryServer,
                             e.Message), ErrorMessages.HTTP_CLIENT_ERROR_BUTTON);
