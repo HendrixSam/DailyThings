@@ -16,13 +16,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Static\poetry.db" >
+    <EmbeddedResource Include="Static\poetry.db">
 		<LogicalName>poetry.db</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
