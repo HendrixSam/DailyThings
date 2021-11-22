@@ -1,4 +1,5 @@
 ﻿using DailyThings.Services;
+using DailyThings.Services.Implementations;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace DailyThings.ViewModels {
@@ -17,7 +18,8 @@ namespace DailyThings.ViewModels {
         /// </summary>
         public ViewModelLocator() {
             //注册
-            SimpleIoc.Default.Register<IPoetryStorage, IPoetryStorage>();
+            SimpleIoc.Default.Register<IPoetryStorage, PoetryStorage>();
+            SimpleIoc.Default.Register<IPreferenceStorage, PreferenceStorage>();
             SimpleIoc.Default.Register<MainPageViewModel>();
         }
     }
