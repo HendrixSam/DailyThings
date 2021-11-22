@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DailyThings.Views;
 using Xamarin.Forms;
 
 namespace DailyThings.Services.Implementations {

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using DailyThings.Views;
+using Xamarin.Forms;
 
 namespace DailyThings {
     public partial class App : Application {
