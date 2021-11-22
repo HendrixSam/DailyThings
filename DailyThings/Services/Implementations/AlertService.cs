@@ -26,8 +26,8 @@ namespace DailyThings.Services.Implementations {
         /// <param name="title">标题</param>
         /// <param name="content">内容</param>
         /// <param name="button">按钮文字</param>
-        public void DisPlayAlert(string title, string content, string button) {
-            MainPage.DisplayAlert(title, content, button);
-        }
+        public void DisPlayAlert(string title, string content, string button) =>
+            Device.BeginInvokeOnMainThread(() =>
+                MainPage.DisplayAlert(title, content, button));
     }
 }
