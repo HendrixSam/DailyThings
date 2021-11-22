@@ -19,6 +19,8 @@ namespace DailyThings.ViewModels {
         public ViewModelLocator() {
             //注册
             SimpleIoc.Default.Register<IPoetryStorage, PoetryStorage>();
+            SimpleIoc.Default.Register<IPoetryService, PoetryService>();
+            SimpleIoc.Default.Register<IAlertService, AlertService>();
             SimpleIoc.Default.Register<IPreferenceStorage, PreferenceStorage>();
             SimpleIoc.Default.Register<MainPageViewModel>();
         }
