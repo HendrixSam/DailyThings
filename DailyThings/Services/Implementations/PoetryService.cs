@@ -159,7 +159,7 @@ namespace DailyThings.Services.Implementations {
             var poetryList = await _poetryStorage.GetPoetryListAsync(
                 Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
                     Expression.Parameter(typeof(Poetry), "p")),
-                new Random().Next(30), 1);
+                new Random().Next(PoetryStorageConstants.PoetryNumber), 1);
             var poetry = poetryList[0];
             return new Poetry {
                 Snippet = poetry.Snippet,
