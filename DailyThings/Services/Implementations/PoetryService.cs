@@ -1,5 +1,7 @@
 ﻿using DailyThings.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 using DailyThings.Utils;
@@ -37,17 +39,22 @@ namespace DailyThings.Services.Implementations {
         /// </summary>
         private IAlertService _alertService;
 
+        /// <summary>
+        /// 诗词存储。
+        /// </summary>
+        private IPoetryStorage _poetryStorage;
+
         /******** 继承方法 ********/
         /// <summary>
         /// 获得诗词
         /// </summary>
         public async Task<Poetry> GetPoetryAsync() {
             var token = await GetPoetryTokenAsync();
-            //if (string.IsNullOrEmpty(token)) {
-            //    return await GetRandomPoetryAsync();
-            //}
+            if (string.IsNullOrEmpty(token)) {
+                return await GetRandomPoetryAsync();
+            }
 
-            //JinrishiciSentence jinrishiciSentence;
+            PoetrySentence poetrySentence;
             using (var httpClient = new HttpClient()) {
                 var headers = httpClient.DefaultRequestHeaders;
                 headers.Add("X-User-Token", token);
@@ -61,15 +68,29 @@ namespace DailyThings.Services.Implementations {
                 } catch (Exception e) {
                     _alertService.DisplayAlert(
                         ErrorMessages.HTTP_CLIENT_ERROR_TITLE,
-                        ErrorMessages.HttpClientErrorMessage(Server, e.Message),
+                        ErrorMessages.HttpClientErrorMessage(PoetryServer, e.Message),
                         ErrorMessages.HTTP_CLIENT_ERROR_BUTTON);
                     return await GetRandomPoetryAsync();
                 }
 
                 var json = await response.Content.ReadAsStringAsync();
-                jinrishiciSentence =
-                    JsonConvert.DeserializeObject<JinrishiciSentence>(json);
+                poetrySentence =
+                    JsonConvert.DeserializeObject<PoetrySentence>(json);
             }
+
+            if (poetrySentence != null) {
+                return new Poetry {
+                    Snippet = poetrySentence.Data.Content,
+                    Name = poetrySentence.Data.Origin.Title,
+                    Dynasty = poetrySentence.Data.Origin.Dynasty,
+                    AuthorName = poetrySentence.Data.Origin.Author,
+                    Content =
+                        string.Join("\n", poetrySentence.Data.Origin.Content),
+                    MatchTags = string.Join("\n", poetrySentence.Data.MatchTags)
+                };
+            }
+
+            return await GetRandomPoetryAsync();
         }
 
         /******** 公有方法 ********/
@@ -79,10 +100,12 @@ namespace DailyThings.Services.Implementations {
         /// </summary>
         /// <param name="preferenceStorage">偏好存储</param>
         /// <param name="alertService">警告服务</param>
+        /// <param name="poetryStorage">诗词存储</param>
         public PoetryService(IPreferenceStorage preferenceStorage,
-            IAlertService alertService) {
+            IAlertService alertService, IPoetryStorage poetryStorage) {
             _preferenceStorage = preferenceStorage;
             _alertService = alertService;
+            _poetryStorage = poetryStorage;
         }
 
         /******** 私有方法 ********/
@@ -128,9 +151,45 @@ namespace DailyThings.Services.Implementations {
             _preferenceStorage.Set(PoetryTokenKey, _token);
             return _token;
         }
+
+        /// <summary>
+        /// 获得随机诗词
+        /// </summary>
+        private async Task<Poetry> GetRandomPoetryAsync() {
+            var poetryList = await _poetryStorage.GetPoetryListAsync(
+                Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
+                    Expression.Parameter(typeof(Poetry), "p")),
+                new Random().Next(30), 1);
+            var poetry = poetryList[0];
+            return new Poetry {
+                Snippet = poetry.Snippet,
+                Name = poetry.Name,
+                Dynasty = poetry.Dynasty,
+                AuthorName = poetry.AuthorName,
+                Content = poetry.Content,
+                MatchTags = poetry.MatchTags
+            };
+        }
     }
 
     public class PoetryToken {
         public string Data { get; set; }
+    }
+
+    public class PoetryOrigin {
+        public string Title { get; set; }
+        public string Dynasty { get; set; }
+        public string Author { get; set; }
+        public List<string> Content { get; set; }
+    }
+
+    public class PoetryData {
+        public string Content { get; set; }
+        public PoetryOrigin Origin { get; set; }
+        public List<string> MatchTags { get; set; }
+    }
+
+    public class PoetrySentence {
+        public PoetryData Data { get; set; }
     }
 }
