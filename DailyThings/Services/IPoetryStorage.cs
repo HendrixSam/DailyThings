@@ -41,6 +41,10 @@ namespace DailyThings.Services {
     /// </summary>
     public static class PoetryStorageConstants {
         /// <summary>
+        /// 诗词数据库中诗词的数量
+        /// </summary>
+        public const int PoetryNumber = 30;
+        /// <summary>
         /// 版本键"PoetryStorageConstants.Version"
         /// </summary>
         public const string VersionKey =
