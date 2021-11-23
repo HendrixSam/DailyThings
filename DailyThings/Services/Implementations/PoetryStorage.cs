@@ -11,64 +11,9 @@ namespace DailyThings.Services.Implementations {
     /// <summary>
     /// 诗词存储实现
     /// </summary>
-    public class PoetryStorage : IPoetryStorage {
-        /******** 公有变量 ********/
+    public class PoetryStorage : DataBaseService {
 
-        /// <summary>
-        /// 诗词数据库文件路径
-        /// </summary>
-        public static readonly string PoetryDbPath =
-            Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder
-                    .LocalApplicationData), PoetryDbName);
-
-        /******** 私有变量 ********/
-
-        /// <summary>
-        /// 诗词数据库文件名称
-        /// </summary>
-        private const string PoetryDbName = "DailyThings.db";
-
-        /// <summary>
-        /// 数据库连接
-        /// </summary>
-        private SQLiteAsyncConnection _connection;
-
-        private SQLiteAsyncConnection Connection =>
-            _connection ??
-            (_connection = new SQLiteAsyncConnection(PoetryDbPath));
-
-        /// <summary>
-        /// 偏好存储
-        /// </summary>
-        private IPreferenceStorage _preference;
-        /******** 继承方法 ********/
-
-        /// <summary>
-        /// 初始化诗词存储
-        /// </summary>
-        public async Task InitializeAsync() {
-            using (var dbFileStream =
-                new FileStream(PoetryDbPath, FileMode.Create))
-            using (var dbAssertStream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream(PoetryDbName)) {
-                if (dbAssertStream != null) {
-                    await dbAssertStream.CopyToAsync(dbFileStream);
-                }
-            }
-
-            _preference.Set(PoetryStorageConstants.VersionKey,
-                PoetryStorageConstants.Version);
-        }
-
-        /// <summary>
-        /// 是否已经初始化
-        /// </summary>
-        public bool Initialized() =>
-            _preference.Get(PoetryStorageConstants.VersionKey,
-                PoetryStorageConstants.DefaultVersion) ==
-            PoetryStorageConstants.Version;
-
+        /******** 公有方法 ********/
 
         /// <summary>
         /// 获取一首诗词
@@ -94,13 +39,9 @@ namespace DailyThings.Services.Implementations {
         /// <summary>
         /// 构造方法
         /// </summary>
-        public PoetryStorage(IPreferenceStorage preferenceStorage) {
-            _preference = preferenceStorage;
+        public PoetryStorage(IPreferenceStorage preferenceStorage) : base(preferenceStorage) {
+            Preference = preferenceStorage;
         }
 
-        /// <summary>
-        /// 关闭诗词数据库
-        /// </summary>
-        public async Task CloseAsync() => await Connection.CloseAsync();
     }
 }

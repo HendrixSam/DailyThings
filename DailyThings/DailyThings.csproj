@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Static\DailyThings.db">
-	    <LogicalName>DailyThings.db</LogicalName>
+		<LogicalName>DailyThings.db</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 

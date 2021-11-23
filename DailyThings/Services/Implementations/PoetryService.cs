@@ -40,9 +40,9 @@ namespace DailyThings.Services.Implementations {
         private IAlertService _alertService;
 
         /// <summary>
-        /// 诗词存储。
+        /// 诗词存储
         /// </summary>
-        private IPoetryStorage _poetryStorage;
+        private PoetryStorage _poetryStorage;
 
         /******** 继承方法 ********/
         /// <summary>
@@ -102,7 +102,7 @@ namespace DailyThings.Services.Implementations {
         /// <param name="alertService">警告服务</param>
         /// <param name="poetryStorage">诗词存储</param>
         public PoetryService(IPreferenceStorage preferenceStorage,
-            IAlertService alertService, IPoetryStorage poetryStorage) {
+            IAlertService alertService, PoetryStorage poetryStorage) {
             _preferenceStorage = preferenceStorage;
             _alertService = alertService;
             _poetryStorage = poetryStorage;
@@ -159,7 +159,7 @@ namespace DailyThings.Services.Implementations {
             var poetryList = await _poetryStorage.GetPoetryListAsync(
                 Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
                     Expression.Parameter(typeof(Poetry), "p")),
-                new Random().Next(PoetryStorageConstants.PoetryNumber), 1);
+                new Random().Next(DailyThingsServiceConstants.PoetryNumber), 1);
             var poetry = poetryList[0];
             return new Poetry {
                 Snippet = poetry.Snippet,
