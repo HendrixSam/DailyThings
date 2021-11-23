@@ -12,11 +12,6 @@ namespace DailyThings.UnitTest.Helpers {
         /******** 公有变量 ********/
 
         /// <summary>
-        /// 诗词数据库中诗词的数量
-        /// </summary>
-        public const int NumberPoetry = 30; 
-
-        /// <summary>
         /// 获得已初始化的诗词存储
         /// </summary>
         public static async Task<PoetryStorage>

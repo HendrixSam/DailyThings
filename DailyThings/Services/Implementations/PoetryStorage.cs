@@ -27,7 +27,7 @@ namespace DailyThings.Services.Implementations {
         /// <summary>
         /// 诗词数据库文件名称
         /// </summary>
-        private const string PoetryDbName = "poetry.db";
+        private const string PoetryDbName = "DailyThings.db";
 
         /// <summary>
         /// 数据库连接

@@ -14,7 +14,10 @@ namespace DailyThings.UnitTest.Services {
     /// 诗词存储测试
     /// </summary>
     public class PoetryStorageTest {
-        [SetUp, TearDown] //SetUp单元测试运行前运行，TearDown单元测试运行后运行
+        /// <summary>
+        /// SetUp单元测试运行前运行,TearDown单元测试运行后运行
+        /// </summary>
+        [SetUp, TearDown]
         public static void RemoveDatabaseFile() =>
             PoetryStorageHelper.RemoveDataBaseFile();
 
@@ -91,7 +94,7 @@ namespace DailyThings.UnitTest.Services {
                 Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
                     Expression.Parameter(typeof(Poetry), "p")), 0,
                 int.MaxValue);//这个条件表示任何都满足
-            Assert.AreEqual(PoetryStorageHelper.NumberPoetry, poetryList.Count);
+            Assert.AreEqual(PoetryStorageConstants.PoetryNumber, poetryList.Count);
             await poetryStorage.CloseAsync();
         }
     }
