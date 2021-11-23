@@ -12,12 +12,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Static\poetry.db" />
+    <None Remove="Static\DailyThings.db" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Static\poetry.db">
-		<LogicalName>poetry.db</LogicalName>
+    <EmbeddedResource Include="Static\DailyThings.db">
+	    <LogicalName>DailyThings.db</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 
