@@ -11,7 +11,7 @@ namespace DailyThings.Services.Implementations {
     /// <summary>
     /// 诗词存储实现
     /// </summary>
-    public class PoetryStorage : DataBaseStorage {
+    public class PoetryStorage : DataBaseService {
 
         /******** 公有方法 ********/
 

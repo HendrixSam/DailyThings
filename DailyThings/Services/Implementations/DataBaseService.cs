@@ -10,7 +10,7 @@ namespace DailyThings.Services.Implementations {
     /// <summary>
     /// 数据库存储实现
     /// </summary>
-    public class DataBaseStorage : IDataBaseStorage{
+    public class DataBaseService : IDataBaseService{
         /******** 公有变量 ********/
 
         /// <summary>
@@ -57,24 +57,24 @@ namespace DailyThings.Services.Implementations {
                 }
             }
 
-            Preference.Set(DailyThingsStorageConstants.VersionKey,
-                DailyThingsStorageConstants.Version);
+            Preference.Set(DailyThingsServiceConstants.VersionKey,
+                DailyThingsServiceConstants.Version);
         }
 
         /// <summary>
         /// 是否已经初始化
         /// </summary>
         public bool Initialized() =>
-            Preference.Get(DailyThingsStorageConstants.VersionKey,
-                DailyThingsStorageConstants.DefaultVersion) ==
-            DailyThingsStorageConstants.Version;
+            Preference.Get(DailyThingsServiceConstants.VersionKey,
+                DailyThingsServiceConstants.DefaultVersion) ==
+            DailyThingsServiceConstants.Version;
 
         /******** 公有方法 ********/
 
         /// <summary>
         /// 构造方法
         /// </summary>
-        public DataBaseStorage(IPreferenceStorage preferenceStorage) {
+        public DataBaseService(IPreferenceStorage preferenceStorage) {
             Preference = preferenceStorage;
         }
 

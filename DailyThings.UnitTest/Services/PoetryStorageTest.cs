@@ -19,14 +19,14 @@ namespace DailyThings.UnitTest.Services {
         /// </summary>
         [SetUp, TearDown]
         public static void RemoveDatabaseFile() =>
-            DataBaseStorageHelper.RemoveDataBaseFile();
+            DataBaseServiceHelper.RemoveDataBaseFile();
         /// <summary>
         /// 测试得到一首诗词
         /// </summary>
         [Test]
         public async Task TestGetPoetryAsync() {
             var poetryStorage =
-                await DataBaseStorageHelper.GetInitializedPoetryStorageAsync();
+                await DataBaseServiceHelper.GetInitializedPoetryStorageAsync();
             var poetry = await poetryStorage.GetPoetryAsync(10001);
             Assert.AreEqual("临江仙 · 夜归临皋", poetry.Name);
             await poetryStorage.CloseAsync();
@@ -38,12 +38,12 @@ namespace DailyThings.UnitTest.Services {
         [Test]
         public async Task TestGetPoetryListAsync() {
             var poetryStorage =
-                await DataBaseStorageHelper.GetInitializedPoetryStorageAsync();
+                await DataBaseServiceHelper.GetInitializedPoetryStorageAsync();
             var poetryList = await poetryStorage.GetPoetryListAsync(
                 Expression.Lambda<Func<Poetry, bool>>(Expression.Constant(true),
                     Expression.Parameter(typeof(Poetry), "p")), 0,
                 int.MaxValue);//这个条件表示任何都满足
-            Assert.AreEqual(DailyThingsStorageConstants.PoetryNumber, poetryList.Count);
+            Assert.AreEqual(DailyThingsServiceConstants.PoetryNumber, poetryList.Count);
             await poetryStorage.CloseAsync();
         }
     }

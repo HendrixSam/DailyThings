@@ -7,7 +7,7 @@ namespace DailyThings.Services {
     /// <summary>
     /// 数据库存储接口
     /// </summary>
-    public interface IDataBaseStorage {
+    public interface IDataBaseService {
         /// <summary>
         /// 初始化DailyThings存储
         /// </summary>
@@ -22,7 +22,7 @@ namespace DailyThings.Services {
     /// <summary>
     /// DailyThings存储常量
     /// </summary>
-    public static class DailyThingsStorageConstants {
+    public static class DailyThingsServiceConstants {
         /// <summary>
         /// 诗词数据库中诗词的数量
         /// </summary>
@@ -37,7 +37,7 @@ namespace DailyThings.Services {
         /// 版本键"DailyThingsStorageConstants.Version"
         /// </summary>
         public const string VersionKey =
-            nameof(DailyThingsStorageConstants) + "." + nameof(Version);
+            nameof(DailyThingsServiceConstants) + "." + nameof(Version);
 
         /// <summary>
         /// 版本

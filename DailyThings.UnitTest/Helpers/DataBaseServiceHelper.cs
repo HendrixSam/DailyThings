@@ -8,10 +8,10 @@ namespace DailyThings.UnitTest.Helpers {
     /// <summary>
     /// 数据库存储帮助类
     /// </summary>
-    public static class DataBaseStorageHelper {
+    public static class DataBaseServiceHelper {
 
         /// <summary>
-        /// 获得已初始化的数据库存储
+        /// 获得已初始化的诗词数据库存储
         /// </summary>
         public static async Task<PoetryStorage>
             GetInitializedPoetryStorageAsync() {
@@ -25,6 +25,6 @@ namespace DailyThings.UnitTest.Helpers {
         /// 删除单元测试产生的数据库文件
         /// </summary>
         public static void RemoveDataBaseFile() =>
-            File.Delete(DataBaseStorage.DailyThingsDbPath); //自动删除单元测试的文件
+            File.Delete(DataBaseService.DailyThingsDbPath); //自动删除单元测试的文件
     }
 }
