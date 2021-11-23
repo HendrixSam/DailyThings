@@ -28,7 +28,8 @@ namespace DailyThings.UnitTest.Services {
         public async Task TestGetPoetryListAsync() {
             var musicStorage =
                 await DataBaseServiceHelper.GetInitializedMusicStorageAsync();
-            var musicList = await musicStorage.GetMusicListAsync("happy");
+            var musicList = await musicStorage.GetMusicListAsync(m => m.MatchTags == "happy",
+                0, int.MaxValue);
             Assert.AreEqual(3, musicList.Count);
             await musicStorage.CloseAsync();
         }

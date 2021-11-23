@@ -4,10 +4,14 @@
              x:Class="DailyThings.Views.MainPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="Result"
+            <Label x:Name="PoetryResult"
                    FontSize="50" />
-            <Button Clicked="Button_OnClicked"
-                    Text="get" />
+            <Button Clicked="PoetryButton_OnClicked"
+                    Text="PoetryButton" />
+            <Label x:Name="MusicResult"
+                   FontSize="50" />
+            <Button Clicked="MusicButton_OnClicked"
+                    Text="MusicButton" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

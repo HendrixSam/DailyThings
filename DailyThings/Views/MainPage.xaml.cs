@@ -16,13 +16,20 @@ namespace DailyThings.Views {
             InitializeComponent();
         }
 
-        private async void Button_OnClicked(object sender, EventArgs e) {
+        private async void PoetryButton_OnClicked(object sender, EventArgs e) {
             var poetryService = new PoetryService(
                 SimpleIoc.Default.GetInstance<IPreferenceStorage>(),
                 SimpleIoc.Default.GetInstance<IAlertService>(),
                 SimpleIoc.Default.GetInstance<PoetryStorage>());
             var poetry = await poetryService.GetPoetryAsync();
-            Result.Text = poetry.Name;
+            PoetryResult.Text = poetry.Name;
+        }
+
+        private async void MusicButton_OnClicked(object sender, EventArgs e) {
+            var musicService = new MusicService(SimpleIoc.Default.GetInstance<MusicStorage>(),
+                SimpleIoc.Default.GetInstance<IAlertService>());
+            var music = await musicService.GetMusicAsync();
+            MusicResult.Text = music.Url;
         }
     }
 }

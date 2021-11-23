@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,8 @@ namespace DailyThings.Services.Implementations {
         /// </summary>
         public async Task<Music> GetMusicAsync() {
             // todo 只传了happy,之后进行修改
-            var musicList = await _musicStorage.GetMusicListAsync("happy");
+            var musicList = await _musicStorage.GetMusicListAsync(m => m.MatchTags == "funny",
+                0, int.MaxValue);
 
             var count = new Random().Next(0, musicList.Count - 1);
 
@@ -47,8 +49,7 @@ namespace DailyThings.Services.Implementations {
                 try {
                     response = await httpClient.GetAsync(
                         "http://8.140.151.45:3000/song/url?id=" +
-                        musicList[count]
-                            .Id);
+                        musicList[count].Id);
                     response.EnsureSuccessStatusCode();
                 } catch (Exception e) {
                     _alertService.DisplayAlert(
@@ -66,6 +67,7 @@ namespace DailyThings.Services.Implementations {
             if (musicWithUrl == null) {
                 return null;
             }
+
             return new Music {
                 Artist = musicList[count].Artist,
                 Id = musicList[count].Id,
