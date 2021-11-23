@@ -10,10 +10,10 @@ namespace DailyThings.Services.Implementations {
         /******** 公有方法 ********/
 
         /// <summary>
-        /// 获取一首音乐
+        /// 获取若干首音乐
         /// </summary>
         /// <param name="matchTags">音乐标签</param>
-        public async Task<IList<Music>> GetMusicAsync(string matchTags) =>
+        public async Task<IList<Music>> GetMusicListAsync(string matchTags) =>
             await Connection.Table<Music>()
                 .Where(m => m.MatchTags == matchTags).ToListAsync();
 

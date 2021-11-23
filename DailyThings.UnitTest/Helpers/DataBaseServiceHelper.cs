@@ -22,6 +22,17 @@ namespace DailyThings.UnitTest.Helpers {
         }
 
         /// <summary>
+        /// 获得已初始化的音乐数据库存储
+        /// </summary>
+        public static async Task<MusicStorage>
+            GetInitializedMusicStorageAsync() {
+            var musicStorage =
+                new MusicStorage(new Mock<IPreferenceStorage>().Object);
+            await musicStorage.InitializeAsync();
+            return musicStorage;
+        }
+
+        /// <summary>
         /// 删除单元测试产生的数据库文件
         /// </summary>
         public static void RemoveDataBaseFile() =>
