@@ -26,22 +26,21 @@ namespace DailyThings.Services.Implementations {
         /// <summary>
         /// 诗词数据库文件名称
         /// </summary>
-        private const string DailyThingsDbName = "DailyThings.db";
+        protected const string DailyThingsDbName = "DailyThings.db";
 
         /// <summary>
         /// 数据库连接
         /// </summary>
         private SQLiteAsyncConnection _connection;
 
-        private SQLiteAsyncConnection Connection =>
+        protected SQLiteAsyncConnection Connection =>
             _connection ??
             (_connection = new SQLiteAsyncConnection(DailyThingsDbPath));
 
         /// <summary>
         /// 偏好存储
         /// </summary>
-        private IPreferenceStorage _preference;
-
+        protected IPreferenceStorage Preference;
 
         /******** 继承方法 ********/
 
@@ -58,7 +57,7 @@ namespace DailyThings.Services.Implementations {
                 }
             }
 
-            _preference.Set(DailyThingsStorageConstants.VersionKey,
+            Preference.Set(DailyThingsStorageConstants.VersionKey,
                 DailyThingsStorageConstants.Version);
         }
 
@@ -66,7 +65,7 @@ namespace DailyThings.Services.Implementations {
         /// 是否已经初始化
         /// </summary>
         public bool Initialized() =>
-            _preference.Get(DailyThingsStorageConstants.VersionKey,
+            Preference.Get(DailyThingsStorageConstants.VersionKey,
                 DailyThingsStorageConstants.DefaultVersion) ==
             DailyThingsStorageConstants.Version;
 
@@ -76,7 +75,7 @@ namespace DailyThings.Services.Implementations {
         /// 构造方法
         /// </summary>
         public DataBaseStorage(IPreferenceStorage preferenceStorage) {
-            _preference = preferenceStorage;
+            Preference = preferenceStorage;
         }
 
         /// <summary>

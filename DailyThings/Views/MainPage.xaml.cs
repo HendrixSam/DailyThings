@@ -20,7 +20,7 @@ namespace DailyThings.Views {
             var poetryService = new PoetryService(
                 SimpleIoc.Default.GetInstance<IPreferenceStorage>(),
                 SimpleIoc.Default.GetInstance<IAlertService>(),
-                SimpleIoc.Default.GetInstance<IPoetryStorage>());
+                SimpleIoc.Default.GetInstance<PoetryStorage>());
             var poetry = await poetryService.GetPoetryAsync();
             Result.Text = poetry.Name;
         }

@@ -13,12 +13,12 @@ namespace DailyThings.UnitTest.Helpers {
         /// <summary>
         /// 获得已初始化的数据库存储
         /// </summary>
-        public static async Task<DataBaseStorage>
+        public static async Task<PoetryStorage>
             GetInitializedPoetryStorageAsync() {
-            var dataBaseStorage =
-                new DataBaseStorage(new Mock<IPreferenceStorage>().Object);
-            await dataBaseStorage.InitializeAsync();
-            return dataBaseStorage;
+            var poetryStorage =
+                new PoetryStorage(new Mock<IPreferenceStorage>().Object);
+            await poetryStorage.InitializeAsync();
+            return poetryStorage;
         }
 
         /// <summary>
