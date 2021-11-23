@@ -9,6 +9,9 @@ namespace DailyThings.Services {
     /// 音乐服务接口
     /// </summary>
     public interface IMusicService {
+        /// <summary>
+        /// 获得一首音乐
+        /// </summary>
         Task<Music> GetMusicAsync();
     }
 }
