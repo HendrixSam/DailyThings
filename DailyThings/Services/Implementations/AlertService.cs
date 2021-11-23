@@ -13,7 +13,7 @@ namespace DailyThings.Services.Implementations {
         /// </summary>
         private MainPage MainPage =>
             _mainPage ?? (_mainPage = Application.Current.MainPage as MainPage);
-
+        
         /// <summary>
         /// 用于显示警告的MainPage。
         /// </summary>
